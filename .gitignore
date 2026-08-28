@@ -1,0 +1,29 @@
+# Ansible
+*.retry
+*.log
+
+# Ansible Vault
+# Ignore vault password files / local secrets
+.vault_pass
+.vault_password
+vault-password
+vault_password
+
+# Local variables / environment files
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
