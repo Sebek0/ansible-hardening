@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+
+# --- Kernel hardening ---
+kernel.kptr_restrict = {{ sysctl_kernel_kptr_restrict }}
+kernel.dmesg_restrict = {{ sysctl_kernel_dmesg_restrict }}
+kernel.yama.ptrace_scope = {{ sysctl_kernel_yama_ptrace_scope }}
+kernel.unprivileged_bpf_disabled = {{ sysctl_kernel_unprivileged_bpf_disabled }}
+net.core.bpf_jit_harden = {{ sysctl_net_core_bpf_jit_harden }}
+
+# --- Filesystem hardening ---
+fs.protected_hardlinks = {{ sysctl_fs_protected_hardlinks }}
+fs.protected_symlinks = {{ sysctl_fs_protected_symlinks }}
+fs.protected_fifos = {{ sysctl_fs_protected_fifos }}
+fs.protected_regular = {{ sysctl_fs_protected_regular }}
+fs.suid_dumpable = {{ sysctl_fs_suid_dumpable }}
+
+# --- Network hardening (IPv4) ---
+net.ipv4.tcp_syncookies = {{ sysctl_net_ipv4_tcp_syncookies }}
+net.ipv4.conf.all.rp_filter = {{ sysctl_net_ipv4_conf_all_rp_filter }}
+net.ipv4.conf.all.accept_redirects = {{ sysctl_net_ipv4_conf_all_accept_redirects }}
+net.ipv4.conf.all.send_redirects = {{ sysctl_net_ipv4_conf_all_send_redirects }}
+net.ipv4.conf.all.accept_source_route = {{ sysctl_net_ipv4_conf_all_accept_source_route }}
+net.ipv4.icmp_echo_ignore_broadcasts = {{ sysctl_net_ipv4_icmp_echo_ignore_broadcasts }}
+
+# --- Network hardening (IPv6) ---
+net.ipv6.conf.all.accept_redirects = {{ sysctl_net_ipv6_conf_all_accept_redirects }}
+net.ipv6.conf.default.accept_redirects = {{ sysctl_net_ipv6_conf_default_accept_redirects }}
+net.ipv6.conf.all.accept_source_route = {{ sysctl_net_ipv6_conf_all_accept_source_route }}
+net.ipv6.conf.default.accept_source_route = {{ sysctl_net_ipv6_conf_default_accept_source_route }}
