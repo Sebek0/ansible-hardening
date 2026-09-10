@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+
+Port {{ sshd_port | default(2222) }}
+ListenAddress {{ sshd_listen_address | default('0.0.0.0') }}
+
+# Logging
+SyslogFacility AUTH
+LogLevel {{ sshd_loglevel | default('INFO') }}
+
+# Authentication
+LoginGraceTime {{ sshd_login_grace_time | default('20') }}
+PermitRootLogin {{ sshd_permit_root_login | default('no') }}
+PasswordAuthentication {{ sshd_password_authentication | default('no') }}
+PermitEmptyPasswords no
+PubkeyAuthentication {{ sshd_pubkey_authentication | default('yes') }}
+KbdInteractiveAuthentication {{ sshd_kbd_interactive_auth | default('no') }}
+AuthenticationMethods publickey
+MaxAuthTries {{ sshd_max_auth_tries | default('3') }}
+MaxSessions {{ sshd_max_session | default('5') }}
+ClientAliveInterval {{ sshd_client_alive_interval | default('300') }}
+ClientAliveCountMax {{ sshd_client_alive_count_max | default('3') }}
+X11Forwarding no
+AllowAgentForwarding no
+PermitUserEnvironment no
+UsePAM yes
+
+{% if sshd_allow_groups is defined %}
+AllowGroups {{ sshd_allow_groups | join(' ') }}
+{% endif %}
