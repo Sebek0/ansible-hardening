@@ -1,3 +1,6 @@
 ---
 - name: Include sshd configuration tasks
   ansible.builtin.include_tasks: sshd.yml
+
+- name: Include sysctl hardening tasks
+  ansible.builtin.include_tasks: sysctl.yml
