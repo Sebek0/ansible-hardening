@@ -1,0 +1,3 @@
+---
+- name: Include sshd configuration tasks
+  ansible.builtin.include_tasks: sshd.yml
