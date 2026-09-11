@@ -4,3 +4,6 @@
 
 - name: Include sysctl hardening tasks
   ansible.builtin.include_tasks: sysctl.yml
+
+- name: Include journal rotate tasks
+  ansible.builtin.include_tasks: journal_rotate.yml

@@ -1,0 +1,4 @@
+journal_storage: persistent
+journal_sys_max_use: 1G
+journal_max_retention_sec: 1month
+journal_compress: 'yes'
