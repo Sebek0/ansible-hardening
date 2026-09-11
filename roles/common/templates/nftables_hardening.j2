@@ -1,0 +1,46 @@
+define WAN   = "ens3"
+define TSNET = "tailscale0"
+define PUBLIC_TCP = { 6967 }
+define PUBLIC_UDP = { 41641 }
+table inet filter
+delete table inet filter
+
+table inet filter {
+
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+
+        ct state established,related accept
+        ct state invalid drop
+
+
+        iif lo accept
+
+
+        iifname $TSNET accept
+        iifname "docker0" accept
+        iifname "br-*" accept
+
+        ip protocol icmp icmp type {
+            echo-request,
+            destination-unreachable,
+            time-exceeded,
+            parameter-problem
+        } accept
+
+        ip6 nexthdr ipv6-icmp accept
+
+
+        iifname $WAN udp sport 67 udp dport 68 accept
+
+        tcp dport $PUBLIC_TCP ct state new accept
+        udp dport $PUBLIC_UDP accept
+
+        limit rate 5/minute burst 5 packets log prefix "nft-drop: " level info
+        counter comment "odrzucone przez policy drop"
+}
+    chain output {
+        type filter hook output priority filter; policy accept;
+    }
+}
