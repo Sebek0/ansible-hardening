@@ -1,0 +1,5 @@
+---
+# Package installation variables
+install_apache: true
+install_docker: true
+install_nginx: false
