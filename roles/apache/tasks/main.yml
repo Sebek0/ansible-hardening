@@ -3,4 +3,14 @@
   ansible.builtin.apt:
     name: apache
     state: present
-  when: install_apache | default(false)
+  when:
+    - install_apache | default(false)
+    - ansible_facts['distribution'] in ['Ubuntu', 'Debian']
+
+- name: Install httpd
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+  when:
+    - install_apache | default(false)
+    - ansible_facts['os_family'] == "RedHat"
