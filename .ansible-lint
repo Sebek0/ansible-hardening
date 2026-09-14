@@ -4,4 +4,6 @@ exclude_paths:
   - molecule/
   - roles/external/
   - collections/
-  - venv/
+  - .venv/
+  - "**/.venv/**"
+  - .venv/**
