@@ -1,0 +1,24 @@
+name: Main lint
+
+on:
+  push:
+    branches:
+      - "dev/*"
+      - "feature/*"
+      - "fix/*"
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  ansible-lint:
+    name: Ansible Lint
+    uses: ./.github/workflows/ansible-lint.yml
+
+  markdown-lint:
+    name: Markdown Lint
+    uses: ./.github/workflows/markdown-lint.yml
+
+  yaml-lint:
+    name: YAML Lint
+    uses: ./.github/workflows/yaml-lint.yml
