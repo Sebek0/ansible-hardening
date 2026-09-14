@@ -4,3 +4,6 @@
   become: true
   roles:
     - common
+    - {role: docker, when: install_docker | default(false)}
+    - {role: nginx, when: install_nginx | default(false)}
+    - {role: apache, when: install_apache | default(false)}
