@@ -1,0 +1,10 @@
+---
+exclude_paths:
+  - .cache/
+  - .github/
+  - molecule/
+  - roles/external/
+  - collections/
+  - .venv/
+  - "**/.venv/**"
+  - .venv/**
