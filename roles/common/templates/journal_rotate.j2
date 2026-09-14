@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 
 [Journal]
-Storage={{ journal_storage | default('persistent') }}
-SystemMaxUse={{ journal_sys_max_use | default('1G') }}
-MaxRetentionSec={{ journal_max_retention_sec | default('1month') }}
-Compress={{ journal_compress | default('yes') }}
+Storage={{ common_journal_storage | default('persistent') }}
+SystemMaxUse={{ common_journal_sys_max_use | default('1G') }}
+MaxRetentionSec={{ common_journal_max_retention_sec | default('1month') }}
+Compress={{ common_journal_compress | default('yes') }}

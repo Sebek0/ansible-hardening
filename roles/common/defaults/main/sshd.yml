@@ -1,14 +1,15 @@
-sshd_port: 6967
-sshd_listen_address: '0.0.0.0'
-sshd_loglevel: INFO
-sshd_login_grace_time: 20
-sshd_permit_root_login: "no"
-sshd_password_authentication: "no"
-sshd_pubkey_authentication: "yes"
-sshd_kbd_interactive_auth: "no"
-sshd_max_auth_tries: 3
-sshd_max_session: 5
-sshd_client_alive_interval: 300
-sshd_client_alive_count_max: 3
-sshd_allow_groups:
+---
+common_sshd_port: 6967
+common_sshd_listen_address: '0.0.0.0'
+common_sshd_loglevel: INFO
+common_sshd_login_grace_time: 20
+common_sshd_permit_root_login: "no"
+common_sshd_password_authentication: "no"
+common_sshd_pubkey_authentication: "yes"
+common_sshd_kbd_interactive_auth: "no"
+common_sshd_max_auth_tries: 3
+common_sshd_max_session: 5
+common_sshd_client_alive_interval: 300
+common_sshd_client_alive_count_max: 3
+common_sshd_allow_groups:
   - admins

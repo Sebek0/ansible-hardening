@@ -1,3 +1,4 @@
+---
 - name: Deploy nftables config
   ansible.builtin.template:
     src: nftables_hardening.j2
