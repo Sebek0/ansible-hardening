@@ -1,3 +1,4 @@
+---
 - name: Deploy sysctl hardening config
   ansible.builtin.template:
     src: sysctl.conf.j2
