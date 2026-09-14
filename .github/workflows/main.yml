@@ -23,6 +23,6 @@ jobs:
     name: YAML Lint
     uses: ./.github/workflows/yaml-lint.yml
 
-  labeler:
-    name: Labeler
-    uses: ./.github/workflows/labeler.yml
+#  labeler:
+#    name: Labeler
+#    uses: ./.github/workflows/labeler.yml
