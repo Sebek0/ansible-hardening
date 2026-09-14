@@ -1,0 +1,6 @@
+---
+- name: Install apache
+  ansible.builtin.apt:
+    name: apache
+    state: present
+  when: install_apache | default(false)

@@ -1,0 +1,6 @@
+---
+- name: Install docker
+  ansible.builtin.apt:
+    name: docker.io
+    state: present
+  when: install_docker | default(false)
