@@ -1,28 +1,28 @@
 ---
 # Kernel hardening
-sysctl_kernel_kptr_restrict: 2
-sysctl_kernel_dmesg_restrict: 1
-sysctl_kernel_yama_ptrace_scope: 1
-sysctl_kernel_unprivileged_bpf_disabled: 1
-sysctl_net_core_bpf_jit_harden: 2
+common_sysctl_kernel_kptr_restrict: 2
+common_sysctl_kernel_dmesg_restrict: 1
+common_sysctl_kernel_yama_ptrace_scope: 1
+common_sysctl_kernel_unprivileged_bpf_disabled: 1
+common_sysctl_net_core_bpf_jit_harden: 2
 
 # Filesystem hardening
-sysctl_fs_protected_hardlinks: 1
-sysctl_fs_protected_symlinks: 1
-sysctl_fs_protected_fifos: 2
-sysctl_fs_protected_regular: 2
-sysctl_fs_suid_dumpable: 0
+common_sysctl_fs_protected_hardlinks: 1
+common_sysctl_fs_protected_symlinks: 1
+common_sysctl_fs_protected_fifos: 2
+common_sysctl_fs_protected_regular: 2
+common_sysctl_fs_suid_dumpable: 0
 
 # Network hardening - IPv4
-sysctl_net_ipv4_tcp_syncookies: 1
-sysctl_net_ipv4_conf_all_rp_filter: 1
-sysctl_net_ipv4_conf_all_accept_redirects: 0
-sysctl_net_ipv4_conf_all_send_redirects: 0
-sysctl_net_ipv4_conf_all_accept_source_route: 0
-sysctl_net_ipv4_icmp_echo_ignore_broadcasts: 1
+common_sysctl_net_ipv4_tcp_syncookies: 1
+common_sysctl_net_ipv4_conf_all_rp_filter: 1
+common_sysctl_net_ipv4_conf_all_accept_redirects: 0
+common_sysctl_net_ipv4_conf_all_send_redirects: 0
+common_sysctl_net_ipv4_conf_all_accept_source_route: 0
+common_sysctl_net_ipv4_icmp_echo_ignore_broadcasts: 1
 
 # Network hardening - IPv6
-sysctl_net_ipv6_conf_all_accept_redirects: 0
-sysctl_net_ipv6_conf_default_accept_redirects: 0
-sysctl_net_ipv6_conf_all_accept_source_route: 0
-sysctl_net_ipv6_conf_default_accept_source_route: 0
+common_sysctl_net_ipv6_conf_all_accept_redirects: 0
+common_sysctl_net_ipv6_conf_default_accept_redirects: 0
+common_sysctl_net_ipv6_conf_all_accept_source_route: 0
+common_sysctl_net_ipv6_conf_default_accept_source_route: 0

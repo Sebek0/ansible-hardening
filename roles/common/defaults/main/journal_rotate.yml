@@ -1,4 +1,5 @@
-journal_storage: persistent
-journal_sys_max_use: 1G
-journal_max_retention_sec: 1month
-journal_compress: 'yes'
+---
+common_journal_storage: persistent
+common_journal_sys_max_use: 1G
+common_journal_max_retention_sec: 1month
+common_journal_compress: 'yes'
