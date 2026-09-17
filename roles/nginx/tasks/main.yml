@@ -1,0 +1,6 @@
+---
+- name: Install nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+  when: install_nginx | default(false)
