@@ -1,0 +1,25 @@
+---
+- name: Install Docker packages (pinned versions)
+  when: docker_version != "latest"
+  ansible.builtin.dnf:
+    name:
+      - "docker-ce-{{ docker_version }}"
+      - "docker-ce-cli-{{ docker_cli_version }}"
+      - "containerd.io-{{ docker_containerd_version }}"
+    state: present
+  notify: Restart docker
+
+- name: Install Docker packages (latest)
+  when: docker_version == "latest"
+  ansible.builtin.dnf:
+    name: "{{ docker_packages }}"
+    state: present
+  notify: Restart docker
+
+- name: Lock Docker packages at installed version when pinned
+  when: docker_version != "latest"
+  ansible.builtin.command:
+    cmd: dnf versionlock add docker-ce docker-ce-cli containerd.io
+  register: docker_versionlock
+  changed_when: "'added' in docker_versionlock.stdout"
+  failed_when: false

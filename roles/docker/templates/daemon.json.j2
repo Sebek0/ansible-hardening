@@ -1,0 +1,49 @@
+{#
+  Build the dict in Jinja, then dump it, so we only emit keys
+  that are actually set. Keeps daemon.json clean across hosts
+  that use different subsets of these options.
+#}
+{% set config = {} %}
+
+{% set _ = config.update({'log-driver': docker_daemon_log_driver}) %}
+{% if docker_daemon_log_opts %}
+{% set _ = config.update({'log-opts': docker_daemon_log_opts}) %}
+{% endif %}
+
+{% if docker_daemon_storage_driver %}
+{% set _ = config.update({'storage-driver': docker_daemon_storage_driver}) %}
+{% endif %}
+
+{% set _ = config.update({'live-restore': docker_daemon_live_restore}) %}
+{% set _ = config.update({'userland-proxy': docker_daemon_userland_proxy}) %}
+{% set _ = config.update({'ip-forward': docker_daemon_ip_forward}) %}
+
+{% if docker_daemon_default_ulimits %}
+{% set _ = config.update({'default-ulimits': docker_daemon_default_ulimits}) %}
+{% endif %}
+
+{% if docker_daemon_insecure_registries %}
+{% set _ = config.update({'insecure-registries': docker_daemon_insecure_registries}) %}
+{% endif %}
+
+{% if docker_daemon_registry_mirrors %}
+{% set _ = config.update({'registry-mirrors': docker_daemon_registry_mirrors}) %}
+{% endif %}
+
+{% if docker_daemon_dns %}
+{% set _ = config.update({'dns': docker_daemon_dns}) %}
+{% endif %}
+
+{% if docker_daemon_bip %}
+{% set _ = config.update({'bip': docker_daemon_bip}) %}
+{% endif %}
+
+{% if docker_daemon_data_root %}
+{% set _ = config.update({'data-root': docker_daemon_data_root}) %}
+{% endif %}
+
+{% if docker_daemon_extra_options %}
+{% set _ = config.update(docker_daemon_extra_options) %}
+{% endif %}
+
+{{ config | to_nice_json(indent=2) }}

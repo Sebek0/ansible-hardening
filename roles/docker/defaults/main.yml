@@ -1,0 +1,68 @@
+---
+# Package / version control
+# Set to a specific version string (e.g. "5:24.0.7-1~ubuntu.22.04~jammy")
+# to pin, or leave "latest" to always take the newest available build.
+# Pinning is strongly recommended for production.
+docker_version: "latest"
+docker_cli_version: "latest"
+docker_containerd_version: "latest"
+
+docker_packages:
+   - docker.io
+#  - docker-ce
+#  - docker-ce-cli
+#  - containerd.io
+#  - docker-buildx-plugin
+
+docker_install_compose_plugin: true
+docker_compose_plugin_package: docker-compose-plugin
+
+# Service management
+docker_service_enabled: true
+docker_service_state: started
+docker_restart_on_config_change: true
+
+# Users to add to the docker group (passwordless docker access)
+docker_users: []
+# docker_users:
+#   - deploy
+#   - ci-runner
+
+# daemon.json settings — only keys that are set get written.
+# Leave a value as null/omit it to skip that key entirely.
+docker_daemon_log_driver: "json-file"
+docker_daemon_log_opts:
+  max-size: "10m"
+  max-file: "3"
+
+docker_daemon_storage_driver: "overlay2"
+docker_daemon_live_restore: true
+docker_daemon_userland_proxy: false
+docker_daemon_ip_forward: true
+docker_daemon_default_ulimits: {}
+# docker_daemon_default_ulimits:
+#   nofile:
+#     name: nofile
+#     soft: 64000
+#     hard: 64000
+
+docker_daemon_insecure_registries: []
+docker_daemon_registry_mirrors: []
+docker_daemon_dns: []
+docker_daemon_bip: ""                 # custom docker0 bridge subnet, e.g. "172.30.0.1/24"
+docker_daemon_data_root: ""           # relocate /var/lib/docker, e.g. "/data/docker"
+
+docker_daemon_extra_options: {}       # free-form dict merged last, for anything not modeled above
+# docker_daemon_extra_options:
+#   experimental: true
+
+# Proxy configuration for the docker service
+docker_use_proxy: false
+docker_http_proxy: ""
+docker_https_proxy: ""
+docker_no_proxy: "localhost,127.0.0.1"
+
+# Cleanup / maintenance
+docker_prune_enabled: false           # sets up a systemd timer for `docker system prune`
+docker_prune_schedule: "weekly"       # systemd OnCalendar value
+docker_prune_args: "--all --force --volumes --filter \"until=168h\""

@@ -1,0 +1,29 @@
+---
+- name: Install Docker packages (pinned versions)
+  when: docker_version != "latest"
+  ansible.builtin.apt:
+    name:
+      - "docker-ce={{ docker_version }}"
+      - "docker-ce-cli={{ docker_cli_version }}"
+      - "containerd.io={{ docker_containerd_version }}"
+    state: present
+    update_cache: true
+  notify: Restart docker
+
+- name: Install Docker packages (latest)
+  when: docker_version == "latest"
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    state: present
+    update_cache: true
+  notify: Restart docker
+
+- name: Hold Docker packages at installed version when pinned
+  when: docker_version != "latest"
+  ansible.builtin.dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
