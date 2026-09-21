@@ -1,8 +1,9 @@
 ---
 - name: Install apache
   ansible.builtin.apt:
-    name: apache
+    name: apache2
     state: present
+    update_cache: true
   when:
     - install_apache | default(false)
     - ansible_facts['distribution'] in ['Ubuntu', 'Debian']
@@ -11,6 +12,7 @@
   ansible.builtin.dnf:
     name: httpd
     state: present
+    update_cache: true
   when:
     - install_apache | default(false)
     - ansible_facts['os_family'] == "RedHat"

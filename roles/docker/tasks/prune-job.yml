@@ -1,0 +1,44 @@
+---
+- name: Deploy docker prune service unit
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/docker-prune.service
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible — role: docker
+      [Unit]
+      Description=Prune unused Docker data
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/bin/docker system prune {{ docker_prune_args }}
+  notify: reload systemd
+
+- name: Deploy docker prune timer unit
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/docker-prune.timer
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible — role: docker
+      [Unit]
+      Description=Run docker-prune.service on a schedule
+
+      [Timer]
+      OnCalendar={{ docker_prune_schedule }}
+      Persistent=true
+
+      [Install]
+      WantedBy=timers.target
+  notify: reload systemd
+
+- name: Flush handlers so the timer unit is known to systemd before enabling
+  ansible.builtin.meta: flush_handlers
+
+- name: Enable and start docker-prune timer
+  ansible.builtin.systemd_service:
+    name: docker-prune.timer
+    enabled: true
+    state: started
